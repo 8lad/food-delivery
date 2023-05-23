@@ -1,5 +1,11 @@
-import "./App.scss";
+import { RouterList } from '../../router/RouterList';
+import { MainContainer } from '../MainContainer/MainContainer';
+import './App.scss';
 
 export const App = () => {
-	return <h1>Test</h1>;
+  return (
+    <MainContainer>
+      <RouterList />
+    </MainContainer>
+  );
 };
