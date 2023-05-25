@@ -1,5 +1,16 @@
 @import './normalize';
-@import './fonts.scss';
+@import './fonts';
+@import './variables';
+@import './mixins';
+
+html {
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
 
 :root {
   font-synthesis: none;
@@ -15,6 +26,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 #root {
   min-height: 100vh;

@@ -1,0 +1,29 @@
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/mixins';
+
+.swiper,
+.swiper-container {
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-pagination-bullet {
+  background-color: $main-white-color;
+  opacity: 0.5;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: $main-white-color;
+  opacity: 1;
+  width: 24px;
+  @include main-transition(width);
+}
