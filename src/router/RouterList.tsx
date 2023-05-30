@@ -6,6 +6,7 @@ import { Verification } from '../pages/Verification/Verification';
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
 import { AuthRoute } from './AuthRoute/AuthRoute';
+import { ForgetPassword } from '../pages/ForgetPassword/ForgetPassword';
 
 export const RouterList = () => {
   return (
@@ -22,6 +23,10 @@ export const RouterList = () => {
         <Route
           path={PageRoutes.VERIFICATION_PAGE}
           element={<Verification />}
+        />
+        <Route
+          path={PageRoutes.FORGET_PASSWORD}
+          element={<ForgetPassword />}
         />
       </Route>
       <Route element={<ProtectedRoute isAuth={false} />}>

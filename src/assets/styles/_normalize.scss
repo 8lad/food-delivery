@@ -84,6 +84,7 @@ pre {
 
 a {
   background-color: transparent;
+  text-decoration: none;
 }
 
 /**
@@ -208,6 +209,10 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
 }
 
 /**

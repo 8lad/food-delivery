@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { AuthSlilder } from '../../components/AuthSlider/AuthSlilder';
+import { AuthSlilder } from '../../components/Auth/AuthSlider/AuthSlilder';
 import { authRouteStyles } from './AuthRoute.styles';
 
 export const AuthRoute: React.FC = () => {

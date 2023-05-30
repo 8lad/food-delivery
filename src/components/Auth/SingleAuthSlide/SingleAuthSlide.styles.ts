@@ -8,7 +8,7 @@ export const slideContainer = css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 20px 120px 20px;
+  padding: 20px;
   color: ${MainColors.MAIN_WHITE_COLOR};
   text-align: ${MainAlign.TEXT_CENTER};
 `;
