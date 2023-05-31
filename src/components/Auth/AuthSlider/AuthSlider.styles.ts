@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { MainColors } from '../../utils/styleConstants';
+import { MainColors } from '../../../utils/styleConstants';
 
 export const sliderMainContainer = css`
   max-width: 663px;

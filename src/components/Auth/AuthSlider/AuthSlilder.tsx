@@ -1,6 +1,6 @@
 import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SingleAuthSlide } from './SingleAuthSlide/SingleAuthSlide';
+import { SingleAuthSlide } from '../SingleAuthSlide/SingleAuthSlide';
 import { mockSlider } from './mockSliderData';
 
 import { sliderMainContainer } from './AuthSlider.styles';
@@ -21,13 +21,14 @@ export const AuthSlilder = () => {
         autoplay={{ delay: 5000 }}
         loop
       >
-        {mockSlider.map(({ title, image, text }, index) => (
-          <SwiperSlide>
+        {mockSlider.map(({ title, image, text, id }) => (
+          <SwiperSlide key={id}>
             <SingleAuthSlide
-              key={index}
+              key={id}
               title={title}
               image={image}
               text={text}
+              id={id}
             />
           </SwiperSlide>
         ))}
