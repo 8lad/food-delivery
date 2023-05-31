@@ -54,10 +54,3 @@ export const authInputStyles = css`
     cursor: pointer;
   }
 `;
-
-export const errorTextStules = css`
-  color: ${MainColors.MAIN_ERROR_COLOR};
-  padding: 10px;
-  font-size: 16px;
-  line-height: 24px;
-`;

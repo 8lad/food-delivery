@@ -40,6 +40,7 @@ export const SignUp: React.FC = () => {
         />
         <AuthMainButton
           text='Sign up'
+          // eslint-disable-next-line no-console
           onClick={() => console.log('works')}
         />
         <AuthRedirectText

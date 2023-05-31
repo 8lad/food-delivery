@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AuthInputProps, AuthInputType } from './AuthInput.model';
 import { AuthHiddenEyeIcon } from '../../Icons/AuthHiddenEyeIcon';
-import { authInputStyles, errorTextStules } from './AuthInput.styles';
+import { authInputStyles } from './AuthInput.styles';
+import { AuthErrorMessage } from '../AuthErrorMessage/AuthErrorMessage';
 
 export const AuthInput: React.FC<AuthInputProps> = ({
   placeholder,
@@ -34,7 +35,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
         />
         {isInputPassword && <AuthHiddenEyeIcon onClick={showHidePassword} />}
       </label>
-      {hasError && <p css={errorTextStules}>{errorText}</p>}
+      {hasError && <AuthErrorMessage errorText={errorText} />}
     </>
   );
 };

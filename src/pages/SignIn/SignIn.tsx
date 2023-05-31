@@ -43,6 +43,7 @@ export const SignIn: React.FC = () => {
         </Link>
         <AuthMainButton
           text='Sign in'
+          // eslint-disable-next-line no-console
           onClick={() => console.log('works')}
         />
         <AuthRedirectText

@@ -22,6 +22,7 @@ export const ForgetPassword: React.FC = () => {
         />
         <AuthMainButton
           text='Verify'
+          // eslint-disable-next-line no-console
           onClick={() => console.log('works')}
         />
       </AuthContentContainer>
