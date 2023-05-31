@@ -30,8 +30,10 @@ export const authInputStyles = css`
     border: 2px solid transparent;
     width: 100%;
     border-radius: inherit;
+    transition: all 0.5s;
   }
-  input:focus {
+  input:focus,
+  input:hover {
     border: 2px solid ${MainColors.ACCENT_COLOR};
     outline: none;
     color: ${MainColors.ACCENT_COLOR};

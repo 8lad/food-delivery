@@ -25,4 +25,12 @@ export const authMainButtonStyles = css`
     color: ${MainColors.ACCENT_COLOR};
     background-color: ${TextColors.AUTH_MAIN_BUTTON_COLOR};
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:disabled:hover {
+    background-color: ${MainColors.ACCENT_COLOR};
+    color: ${TextColors.AUTH_MAIN_BUTTON_COLOR};
+  }
 `;
