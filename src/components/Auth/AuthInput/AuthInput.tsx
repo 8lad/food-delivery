@@ -7,8 +7,9 @@ import { AuthErrorMessage } from '../AuthErrorMessage/AuthErrorMessage';
 export const AuthInput: React.FC<AuthInputProps> = ({
   placeholder,
   inputIcon,
-  hasError,
-  errorText = 'Invalid value',
+  register,
+  inputFormName,
+  errorText,
   type = 'text',
 }) => {
   const isInputPassword = type === 'password';
@@ -32,10 +33,11 @@ export const AuthInput: React.FC<AuthInputProps> = ({
         <input
           placeholder={placeholder}
           type={inputType}
+          {...register(inputFormName)}
         />
         {isInputPassword && <AuthHiddenEyeIcon onClick={showHidePassword} />}
       </label>
-      {hasError && <AuthErrorMessage errorText={errorText} />}
+      {errorText && <AuthErrorMessage errorText={errorText} />}
     </>
   );
 };
