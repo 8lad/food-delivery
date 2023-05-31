@@ -30,14 +30,14 @@ export const SignUp: React.FC = () => {
       email: yup
         .string()
         .required('This field is required')
-        .email('Please enter valid email value')
+        .email('Please enter the valid email value')
         .trim(),
       password: yup
         .string()
         .required('This field is required')
         .matches(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,20}$/gm,
-          'Password must contain at least one capital letter, one number, and one special sign',
+          'Password must contain at least one capital letter, one number, and one special symbol',
         )
         .trim(),
     })

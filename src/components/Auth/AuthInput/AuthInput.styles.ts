@@ -45,6 +45,13 @@ export const authInputStyles = css`
     line-height: 25px;
     color: ${TextColors.AUTH_PLACEHOLDER_COLOR};
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 100px ${BackgroundColors.AUTH_INPUTS_BG} inset !important;
+    border: 2px solid ${MainColors.ACCENT_COLOR};
+  }
   svg {
     position: absolute;
   }

@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAuth }) => {
   if (!isAuth) {
-    return <Navigate to={PageRoutes.SIGNIN_PAGE} />;
+    return <Navigate to={PageRoutes.SIGNUP_PAGE} />;
   }
   return (
     <>
