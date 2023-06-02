@@ -51,7 +51,11 @@ export const SignIn: React.FC = () => {
     <AuthContainer>
       <AuthContentContainer styles={contentContainerStyles}>
         <AuthTitle text='Sign In To DaPay' />
-        <AuthSocialButton socialIcon={<GoogleIcon />} />
+        <AuthSocialButton
+          // eslint-disable-next-line no-console
+          onClick={() => console.log('works')}
+          socialIcon={<GoogleIcon />}
+        />
         <AuthSubtitle text='OR' />
         <form onSubmit={handleSubmit(onSubmit)}>
           <AuthInput
