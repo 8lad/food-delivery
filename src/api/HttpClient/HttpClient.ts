@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { API_ENDPOINTS } from '../../utils/endpointConstants';
+import { getLocalStorageValue } from '../../helpers/getLocalStorageValue';
+import { LOCAL_STORAGE_TOKEN_OPTION } from '../../utils/globalConstants';
 
 const axiosConfig = {
   baseURL: `${API_ENDPOINTS.BASE_URL}`,
@@ -11,7 +13,7 @@ class HttpClient {
 
   constructor(httpClient: AxiosInstance) {
     this.httpClient = httpClient;
-    const token = localStorage.getItem('token');
+    const token = getLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
     if (token) {
       this.httpClient.defaults.headers.common[
         'Authorization'

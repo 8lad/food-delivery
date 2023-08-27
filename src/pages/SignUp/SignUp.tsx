@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContainer } from '../../components/Auth/AuthContainer/AuthContainer';
 import { AuthContentContainer } from '../../components/Auth/AuthContentContainer/AuthContentContainer';
 import { AuthInput } from '../../components/Auth/AuthInput/AuthInput';
@@ -18,10 +18,22 @@ import { schema } from './SignUp.utils';
 import { PageRoutes } from '../../router/constants';
 import { contentContainerStyles } from '../SignIn/SignIn.styles';
 import { API_ENDPOINTS } from '../../utils/endpointConstants';
+import { getLocalStorageValue } from '../../helpers/getLocalStorageValue';
+import { LOCAL_STORAGE_TOKEN_OPTION } from '../../utils/globalConstants';
+import { useAppDispatch } from '../../store/store';
+import {
+  fetchBaseRegistrationUser,
+  fetchGoogleAuthUser,
+} from '../../slices/userSlice';
+import { UserSignup } from '../../globalTypes';
+import { removeLocalStorageValue } from '../../helpers/removeLocalStorageValue';
 
 export const SignUp: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [, setSearchParams] = useSearchParams();
+  const userToken = getLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
 
   const {
     register,
@@ -32,17 +44,32 @@ export const SignUp: React.FC = () => {
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    const hasToken = getLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
+    if (hasToken) {
+      removeLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
+    }
+    const userData = {
+      ...data,
+      username: data.email,
+    };
+    dispatch(fetchBaseRegistrationUser(userData as UserSignup));
     reset();
+    navigate(`${PageRoutes.HOME_PAGE}`);
   };
 
   useEffect(() => {
     const idToken = location.search;
     if (idToken) {
-      navigate(location.pathname);
+      dispatch(fetchGoogleAuthUser(idToken));
+      setSearchParams({});
     }
-  }, [location, navigate]);
+  }, [dispatch, location.search, setSearchParams]);
+
+  useEffect(() => {
+    if (userToken) {
+      navigate(`${PageRoutes.HOME_PAGE}`);
+    }
+  }, [navigate, userToken]);
 
   return (
     <AuthContainer>

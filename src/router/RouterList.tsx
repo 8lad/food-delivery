@@ -29,7 +29,7 @@ export const RouterList = () => {
           element={<ForgetPassword />}
         />
       </Route>
-      <Route element={<ProtectedRoute isAuth={false} />}>
+      <Route element={<ProtectedRoute />}>
         <Route
           path={PageRoutes.HOME_PAGE}
           element={<h1>Home</h1>}

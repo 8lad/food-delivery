@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { AuthContainer } from '../../components/Auth/AuthContainer/AuthContainer';
 import { AuthContentContainer } from '../../components/Auth/AuthContentContainer/AuthContentContainer';
 import { AuthInput } from '../../components/Auth/AuthInput/AuthInput';
@@ -11,40 +10,43 @@ import { GoogleIcon } from '../../components/Icons/GoogleIcon';
 import { AuthEmailIcon } from '../../components/Icons/AuthEmailIcon';
 import { AuthLockIcon } from '../../components/Icons/AuthLockIcon';
 import { AuthSubtitle } from '../../components/Auth/AuthSubtitle/AuthSubtitle';
-import { PageRoutes } from '../../router/constants';
 import {
   contentContainerStyles,
   forgetPasswordLinkStyles,
 } from './SignIn.styles';
 import { AuthMainButton } from '../../components/Auth/AuthMainButton/AuthMainButton';
 import { AuthRedirectText } from '../../components/Auth/AuthRedirectText/AuthRedirectText';
+import { schema } from './SignIn.utils';
+import { useAppDispatch } from '../../store/store';
+import { fetchBaseLoginUser } from '../../slices/userSlice';
+import { getLocalStorageValue } from '../../helpers/getLocalStorageValue';
+import { API_ENDPOINTS } from '../../utils/endpointConstants';
+import { removeLocalStorageValue } from '../../helpers/removeLocalStorageValue';
+import { PageRoutes } from '../../router/constants';
+import { LOCAL_STORAGE_TOKEN_OPTION } from '../../utils/globalConstants';
 
 export const SignIn: React.FC = () => {
-  const schema = yup
-    .object({
-      email: yup
-        .string()
-        .required('This field is required')
-        .email('Please enter the valid email value')
-        .trim(),
-      password: yup
-        .string()
-        .required('This field is required')
-        .min(12, 'This field must contain at least 12 symbols')
-        .max(20, 'This field must contain equal or less 20 symbols')
-        .trim(),
-    })
-    .required();
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    const hasToken = getLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
+    if (hasToken) {
+      removeLocalStorageValue(LOCAL_STORAGE_TOKEN_OPTION);
+    }
+    const userData = {
+      password: data.password,
+      identifier: data.email,
+    };
+    dispatch(fetchBaseLoginUser(userData));
+    reset();
   };
 
   return (
@@ -52,8 +54,7 @@ export const SignIn: React.FC = () => {
       <AuthContentContainer styles={contentContainerStyles}>
         <AuthTitle text='Sign In To DaPay' />
         <AuthSocialButton
-          // eslint-disable-next-line no-console
-          onClick={() => console.log('works')}
+          socialNetworkUrl={`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.GOOGLE_API_AUTH}`}
           socialIcon={<GoogleIcon />}
         />
         <AuthSubtitle text='OR' />
